@@ -218,9 +218,27 @@ const withdrawals = movements.filter(mov => mov < 0);
 // for (const mov of movements) balance2 += mov;
 // console.log(balance2);
 
+/*
 //Maximum value
 const max = movements.reduce((acc, mov) => {
   if (acc > mov) return acc;
   else return mov;
 }, movements[0]);
 console.log(max)
+*/
+
+// Challenge 2
+// TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+// TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+const calcAverageHumanAge = ages => {
+  const humanAges = ages.map(age => age <= 2? 2 * age: 16 + age * 4)
+  const adults = humanAges.filter(age => age >= 18)
+  console.log(humanAges)
+  console.log(adults)
+
+  const average = adults.reduce((acc, age, i, arr) => acc + age / arr.length,0)
+  return average;
+}
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg1, avg2);
