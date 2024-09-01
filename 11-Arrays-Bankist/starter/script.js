@@ -77,7 +77,6 @@ const displayMovements = function(movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
-displayMovements(account1.movements)
 
 // console.log(containerMovements.innerHTML)
 
@@ -90,24 +89,49 @@ const createUsernames = function(accs) {
 createUsernames(accounts)
 // console.log(username)
 
-const calcDisplayBalance = function (movements) {
+let currentAccount;
+//Event handler
+btnLogin.addEventListener('click', function(e) {
+  e.preventDefault();  // prevent default form submitting
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value)
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+
+    //clear input field
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    //display movement
+    displayMovements(account1.movements)
+
+    //display balance
+    calcDisplayBalance(account1.movements);
+
+    //display summary
+    calcDisplaySummary(account1.movements)
+  };
+})
+
+const calcDisplayBalance = function (currentAccount) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0)
   labelBalance.textContent = `${balance} EUR`
 }
-calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`
 
-  const out = movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
+  const out = acc.movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`
 
-  const interest = movements.filter(mov => mov > 0).map(deposit => deposit * 1.2/100).filter((int, i, arr) => {return int >= 1})
+  const interest = acc.movements.filter(mov => mov > 0).map(deposit => deposit * acc.interestRate/100).filter((int, i, arr) => {return int >= 1})
       .reduce((acc,mov) => acc + mov, 0)
   labelSumInterest.textContent = `${interest}`
 }
-calcDisplaySummary(account1.movements)
 
 
 
@@ -261,11 +285,15 @@ const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
 */
+
+/*
 // 17. Challenge 3 (using method chaining)
 const calcAverageHumanAge = ages => ages.map(age => age <= 2? 2 * age: 16 + age * 4).filter(age => age >= 18).reduce((acc, age, i, arr) => acc + age / arr.length,0);
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
+
 /*
 /// 16. method chaining
 const eurToUsd = 1.1;
