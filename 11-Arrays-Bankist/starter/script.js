@@ -172,6 +172,13 @@ btnClose.addEventListener('click', function(e) {
   inputClosePin.value = inputCloseUsername.value = '';
 })
 
+let sorted = false;
+btnSort.addEventListener('click', function(e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
+
 
 
 
@@ -357,7 +364,7 @@ console.log(account);
 // some and every
 
 
-
+/*
 // flat and flapMap
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 console.log(arr.flat());
@@ -377,3 +384,28 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
+*/
+
+
+// Sorting
+// owners.sort();    // for string
+
+//numbers
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
