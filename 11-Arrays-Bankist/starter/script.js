@@ -140,8 +140,28 @@ btnLogin.addEventListener('click', function(e) {
   };
 })
 
+btnTransfer.addEventListener('click', function(e) {
+  e.preventDefault();
 
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+  inputTransferAmount.value = inputTransferTo.value = '';
 
+  if (amount > 0 && receiverAcc && currentAccount.balance >= amount && receiverAcc?.username !== currentAccount.username) {
+    // doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // update UI
+    updateUI(currentAccount);
+  }
+})
+
+btnClose.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  console.log("Delete");
+})
 
 
 
