@@ -478,3 +478,5 @@ const dogs = [
   { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
   { weight: 32, curFood: 340, owners: ['Michael'] }
 ];
+
+dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)))
