@@ -386,7 +386,7 @@ const overalBalance2 = accounts
 console.log(overalBalance2);
 */
 
-
+/*
 // Sorting
 // owners.sort();    // for string
 
@@ -409,3 +409,6 @@ console.log(movements);
 // });
 movements.sort((a, b) => b - a);
 console.log(movements);
+*/
+
+const bankDepositSum = accounts.flatMap(acc => acc.movements).filter(mov => mov > 0).reduce((sum, curr) => sum + curr, 0)
