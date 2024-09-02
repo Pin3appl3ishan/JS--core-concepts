@@ -415,7 +415,7 @@ console.log(movements);
 
 // const bankDepositSum = accounts.flatMap(acc => acc.movements).filter(mov => mov > 0).reduce((sum, curr) => sum + curr, 0)
 
-
+/*
 // 2.
 // const numDeposits1000 = accounts
 //   .flatMap(acc => acc.movements)
@@ -427,7 +427,22 @@ const numDeposits1000 = accounts
 
 console.log(numDeposits1000);
 
-// Prefixed ++ oeprator
+// Prefixed ++ operator
 let a = 10;
 console.log(++a);
 console.log(a);
+*/
+
+// 3. using objects as accumulator
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
