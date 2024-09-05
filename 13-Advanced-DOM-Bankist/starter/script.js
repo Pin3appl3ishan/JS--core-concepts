@@ -60,6 +60,17 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+// Page navigation
+
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
 /*
 ///////////////////////////////////////
 // Selecting, Creating, and Deleting Elements
@@ -169,6 +180,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // };
 */
 
+/*
 ///////////////////////////////////////
 // Event Propagation in Practice
 const randomInt = (min, max) =>
@@ -194,3 +206,5 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+*/
+
